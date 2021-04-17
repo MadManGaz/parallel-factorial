@@ -9,3 +9,10 @@ edition = "2018"
 [dependencies]
 rug = "1.12.0"
 rayon = "1.5.0"
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "factorial_benchmark"
+harness = false
