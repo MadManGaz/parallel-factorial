@@ -2,13 +2,13 @@ use rayon::prelude::*;
 use rug::Integer;
 
 fn parallel_factorial(n: u64) -> String {
-    
+
 
     String::from("")
 }
 
 fn factorial(n: u64) -> String {
-    let mut acc = n;
+    let mut acc = Integer::from(n);
     for index in 1..n {
         acc *= index;
     }
