@@ -10,6 +10,6 @@ Calculating 1000000! with a serial algorithm takes 44 seconds on an Apple M1.
 
 ## Purpose
 
-Simple learning project to figure out how to use raylon for some number
+Simple learning project to figure out how to use rayon for some number
 crunching. This is very unlikely to be useful to anyone but it's here
 regardless 🙂
