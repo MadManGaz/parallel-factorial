@@ -1,6 +1,6 @@
 use std::process;
 
-use mp_factorial::{factorial, parallel_factorial};
+use mp_factorial::parallel_factorial;
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
@@ -9,6 +9,5 @@ fn main() {
         process::exit(22); // EINVAL
     };
     let n: u64 = args[1].parse().expect("Malformed number.");
-    println!("factorial({}) = {}", n, factorial(n));
-    println!("parallel_factorial({}) = {}", n, parallel_factorial(n));
+    println!("{}", parallel_factorial(n));
 }
