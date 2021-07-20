@@ -1,8 +1,6 @@
 use rayon::prelude::*;
 use rug::Integer;
 
-// FIXME: Figure out how to use a work stealing algorithm for this as the M1
-//  has asymmetric multiprocessing.
 pub fn parallel_factorial(n: u64) -> String {
     let offset = n as usize / rayon::current_num_threads();
     let vec = (1..=n).collect::<Vec<_>>();
