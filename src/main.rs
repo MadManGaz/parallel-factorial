@@ -1,6 +1,6 @@
 use std::process;
 
-use mp_factorial::factorial;
+use parallel_factorial::factorial;
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
