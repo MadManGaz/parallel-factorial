@@ -1,6 +1,6 @@
 [package]
 name = "parallel-factorial"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Gary Moore <madmangaz@gmail.com>"]
 license = "MIT"
 description = "Simple, fast, parallel factorial calculator."
