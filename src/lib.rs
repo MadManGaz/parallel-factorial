@@ -1,5 +1,5 @@
+use ibig::{UBig, ubig};
 use rayon::prelude::*;
-use rug::Integer;
 
 /// Calculate a factorial number from an integer.
 pub fn factorial(n: u64) -> String {
@@ -10,18 +10,18 @@ pub fn factorial(n: u64) -> String {
         return single_threaded_factorial(n);
     }
 
-    let mut result: Vec<Integer> = vec
+    let mut result: Vec<UBig> = vec
         .chunks(offset)
         .par_bridge()
         .into_par_iter()
         .map(|range| {
-            let mut acc = Integer::from(1);
+            let mut acc = ubig!(1);
             for &number in range {
                 acc *= number;
             }
             acc
         })
-        .collect::<Vec<Integer>>();
+        .collect::<Vec<UBig>>();
 
     let mut acc = result.pop().unwrap();
 
@@ -33,7 +33,7 @@ pub fn factorial(n: u64) -> String {
 }
 
 fn single_threaded_factorial(n: u64) -> String {
-    let mut acc = Integer::from(n);
+    let mut acc = ubig!(n);
     for index in 1..n {
         acc *= index;
     }
