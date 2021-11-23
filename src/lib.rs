@@ -6,7 +6,7 @@ pub fn factorial(n: u64) -> String {
     let offset = n as usize / rayon::current_num_threads();
     let vec = (1..=n).collect::<Vec<_>>();
 
-    if n < rayon::current_num_threads() as u64 {
+    if n < (rayon::current_num_threads() as u64) * 2 {
         return single_threaded_factorial(n);
     }
 
@@ -24,7 +24,6 @@ pub fn factorial(n: u64) -> String {
         .collect::<Vec<UBig>>();
 
     let mut acc = result.pop().unwrap();
-
     for number in result {
         acc *= number;
     }
