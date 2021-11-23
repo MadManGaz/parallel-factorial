@@ -33,7 +33,7 @@ pub fn factorial(n: u64) -> String {
 }
 
 fn single_threaded_factorial(n: u64) -> String {
-    let mut acc = ubig!(n);
+    let mut acc = UBig::from(n);
     for index in 1..n {
         acc *= index;
     }
