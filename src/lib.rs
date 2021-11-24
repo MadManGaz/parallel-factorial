@@ -1,34 +1,32 @@
-use ibig::{UBig, ubig};
+use ibig::{ubig, UBig};
 use rayon::prelude::*;
 
 /// Calculate a factorial number from an integer.
 pub fn factorial(n: u64) -> String {
-    let offset = n as usize / rayon::current_num_threads();
+    let chunk_size = n as usize / rayon::current_num_threads();
     let vec = (1..=n).collect::<Vec<_>>();
 
     if n < (rayon::current_num_threads() as u64) * 2 {
         return single_threaded_factorial(n);
     }
 
-    let mut result: Vec<UBig> = vec
-        .chunks(offset)
+    vec.chunks(chunk_size)
         .par_bridge()
         .into_par_iter()
-        .map(|range| {
-            let mut acc = ubig!(1);
-            for &number in range {
-                acc *= number;
-            }
-            acc
-        })
-        .collect::<Vec<UBig>>();
+        .map(apply_factorial_to_range)
+        .collect::<Vec<UBig>>()
+        .into_iter()
+        .reduce(|a, b| a * b)
+        .unwrap()
+        .to_string()
+}
 
-    let mut acc = result.pop().unwrap();
-    for number in result {
+fn apply_factorial_to_range(range: &[u64]) -> UBig {
+    let mut acc = ubig!(1);
+    for &number in range {
         acc *= number;
     }
-
-    acc.to_string()
+    acc
 }
 
 fn single_threaded_factorial(n: u64) -> String {
